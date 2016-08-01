@@ -17,6 +17,17 @@
         android:id="@+id/getlogin"
         android:src="@drawable/pims_login_page0"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp" />
+
+    <ImageButton
+        android:layout_height="56dp"
+        android:layout_width="325dp"
+        android:id="@+id/getReg"
+        android:onClick="emailsend"
+        android:src="@drawable/registration"
+        android:layout_above="@+id/getlogin"
+        android:layout_alignLeft="@+id/getlogin"
+        android:layout_alignStart="@+id/getlogin" />
 
 </RelativeLayout>

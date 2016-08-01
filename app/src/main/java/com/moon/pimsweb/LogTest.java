@@ -472,7 +472,12 @@ public class LogTest extends AppCompatActivity
             WebView myWebView = (WebView) this.findViewById(R.id.webView);
             myWebView.getSettings().setJavaScriptEnabled(true);
             myWebView.loadUrl(myUrl);
-            return true;
+            // return true;
+            progressDialog = new ProgressDialog(LogTest.this);
+            progressDialog.setTitle("Loading ....");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Wait a moment please.... ");
+            progressDialog.show();
 
         }
 
@@ -491,6 +496,13 @@ public class LogTest extends AppCompatActivity
             WebView myWebView = (WebView) this.findViewById(R.id.webView);
             myWebView.getSettings().setJavaScriptEnabled(true);
             myWebView.loadUrl(myUrl);
+
+            progressDialog = new ProgressDialog(LogTest.this);
+            progressDialog.setTitle("Loading ....");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Wait a moment please.... ");
+            progressDialog.show();
+
         }
         else if (id == R.id.nav_Profile) {
             // Handle the camera action
@@ -499,6 +511,11 @@ public class LogTest extends AppCompatActivity
             WebView myWebView = (WebView) this.findViewById(R.id.webView);
             myWebView.getSettings().setJavaScriptEnabled(true);
             myWebView.loadUrl(myUrl);
+            progressDialog = new ProgressDialog(LogTest.this);
+            progressDialog.setTitle("Loading ....");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Wait a moment please.... ");
+            progressDialog.show();
 
         } else if (id == R.id.nav_AddPatients) {
 
@@ -506,6 +523,11 @@ public class LogTest extends AppCompatActivity
             WebView myWebView = (WebView) this.findViewById(R.id.webView);
             myWebView.getSettings().setJavaScriptEnabled(true);
             myWebView.loadUrl(myUrl);
+            progressDialog = new ProgressDialog(LogTest.this);
+            progressDialog.setTitle("Loading ....");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Wait a moment please.... ");
+            progressDialog.show();
 
         } else if (id == R.id.nav_PatientList) {
 
@@ -514,12 +536,24 @@ public class LogTest extends AppCompatActivity
             myWebView.getSettings().setJavaScriptEnabled(true);
             myWebView.loadUrl(myUrl);
 
+            progressDialog = new ProgressDialog(LogTest.this);
+            progressDialog.setTitle("Loading ....");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Wait a moment please.... ");
+            progressDialog.show();
+
         } else if (id == R.id.nav_Report) {
 
             String myUrl = "http://www.twistermedia.com/pims/app_report.php";
             WebView myWebView = (WebView) this.findViewById(R.id.webView);
             myWebView.getSettings().setJavaScriptEnabled(true);
             myWebView.loadUrl(myUrl);
+
+            progressDialog = new ProgressDialog(LogTest.this);
+            progressDialog.setTitle("Loading ....");
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Wait a moment please.... ");
+            progressDialog.show();
 
         }
 
