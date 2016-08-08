@@ -6,6 +6,6 @@ package com.moon.pimsweb;
 public class testEmail {
 
     testEmail(){
-        
+        String addProfile;
     }
 }
