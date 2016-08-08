@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Twister PIMS</string>
     <string name="title_activity_welcome">Welcome</string>
+    <string name="Send_Email">Email Us</string>
     <string name="About_Us">"We are Twister Media Technology.\n\n"
             "www.twistermedia.com\n"</string>
     <string name="title_activity_log_i">LogIActivity</string>
@@ -11,4 +12,6 @@
     <string name="action_settings">Home</string>
     <string name="title_activity_log_test">Welcome</string>
     <string name="Error...">Error...!\n No Internet Access.\n Please check your internet connection.</string>
+
+
 </resources>

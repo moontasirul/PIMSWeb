@@ -31,6 +31,15 @@ public class MainActivityRun extends AppCompatActivity {
             }
         });
 
+        btnReg = (ImageButton)findViewById(R.id.getReg);
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityRun.this, SendEmail.class);
+                startActivity(intent);
+            }
+        });
+
     }
 //        btnReg= (Button)findViewById(R.id.getReg);
 //        btnReg.setOnClickListener(new View.OnClickListener() {
@@ -43,19 +52,7 @@ public class MainActivityRun extends AppCompatActivity {
 //        });
 
 
-    public void emailsend(View view) {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto:" + "contact@twistermedia.com"));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
 
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send email using..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(MainActivityRun.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 
 
@@ -70,7 +67,6 @@ public class MainActivityRun extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
-
                 })
                 .setNegativeButton("No", null)
                 .show();

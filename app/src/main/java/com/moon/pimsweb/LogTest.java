@@ -1,12 +1,16 @@
 package com.moon.pimsweb;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.MailTo;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +20,7 @@ import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,6 +38,7 @@ import android.view.Window;
 import android.webkit.ConsoleMessage;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -43,8 +49,11 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 public class LogTest extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,14 +78,10 @@ public class LogTest extends AppCompatActivity
 
 
     private static final int INPUT_FILE_REQUEST_CODE = 1;
-   // private static final int FILECHOOSER_RESULTCODE = 1;
     private static final String TAG = LogTest.class.getSimpleName();
-   // private WebView webView;
-   // private WebSettings webSettings;
-   // private ValueCallback<Uri> mUploadMessage;
-   // private Uri mCapturedImageURI = null;
     private ValueCallback<Uri[]> mFilePathCallback;
     private String mCameraPhotoPath;
+    final Activity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,11 +144,58 @@ public class LogTest extends AppCompatActivity
             Parseweb.getSettings().setSupportZoom(true);
 
 
+            Parseweb.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+            Parseweb.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            Parseweb.getSettings().setAppCacheEnabled(true);
+            webSettings.setDomStorageEnabled(true);
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+            webSettings.setUseWideViewPort(true);
+            webSettings.setSavePassword(true);
+            webSettings.setSaveFormData(true);
+            webSettings.setEnableSmoothTransition(true);
+
+
+
+
+
             Parseweb.setWebViewClient(new WebViewClient() {
 
                 public void onPageFinished(WebView view, String url) {
                     setTitle(R.string.app_name);
 
+                }
+            });
+
+
+            Parseweb.setWebViewClient(new WebViewClient(){
+
+
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+
+
+                    if(url.startsWith("tel")) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:+880258610418"));
+                        startActivity(intent);
+                        return true;
+
+                    }
+
+                    else if (url.startsWith("mailto:")) {
+
+                        String body = "Enter your Question, Enquiry or Feedback below:\n\n";
+                        Intent email = new Intent(Intent.ACTION_SEND);
+                        email.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@twistermedia.com"});
+                        email.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                        email.putExtra(Intent.EXTRA_TEXT, body);
+                        //need this to prompts email client only
+                        email.setType("message/rfc822");
+                        startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                        return true;
+                    }
+                    view.loadUrl(url);
+                    return true;
                 }
             });
 
@@ -587,4 +639,69 @@ public class LogTest extends AppCompatActivity
 
         }
     };
+
+
+    public void emailsend(View view) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:" + "contact@twistermedia.com"));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send email using..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(LogTest.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void Phonecall(View view){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(LogTest.this);
+        alert.setMessage("Do want to call hot line ");
+        alert.setCancelable(true);
+        alert.setPositiveButton("Yes ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:+8801819214616"));
+
+                if (ActivityCompat.checkSelfPermission(LogTest.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                    return;
+                }
+
+                startActivity(callIntent);
+            }
+        });
+        alert.setNegativeButton("No ", null);
+        alert.create();
+        alert.show();
+    }
+
+    public void CallLandPhone(View view){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(LogTest.this);
+        alert.setMessage("Do want to call in Land Phone ");
+        alert.setCancelable(true);
+        alert.setPositiveButton("Yes ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:+880258610418"));
+
+            if (ActivityCompat.checkSelfPermission(LogTest.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+            }
+
+            startActivity(callIntent);
+        }
+        });
+        alert.setNegativeButton("No ", null);
+        alert.create();
+        alert.show();
+    }
+
+
 }

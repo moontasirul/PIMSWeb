@@ -1,5 +1,7 @@
 package com.moon.pimsweb;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,10 +21,12 @@ public class ErrorNetwork extends AppCompatActivity {
         btnerror= (Button)findViewById(R.id.error_button);
         btnerror.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(ErrorNetwork.this,MainActivityRun.class);
                 startActivity(intent);
             }
         });
     }
+
 }
