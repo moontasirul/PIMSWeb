@@ -14,4 +14,6 @@
     <string name="Error...">Error...!\n No Internet Access.\n Please check your internet connection.</string>
 
 
+    <string name="title">Twister Patient Information\nManagement System (PIMS)</string>
+
 </resources>

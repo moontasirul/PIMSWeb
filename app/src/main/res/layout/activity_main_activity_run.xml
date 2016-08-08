@@ -15,15 +15,43 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/pims_login_page"
+        android:background="@drawable/pims_login_page_without_logo_title"
         android:weightSum="1">
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="30dp"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:layout_height="match_parent"
+                        android:layout_width="100dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/title_logo"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="220dp"
+                        android:text="@string/title"
+                        android:textSize="20sp"
+                        android:layout_gravity="center"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginTop="520dp">
+                    android:layout_marginTop="420dp">
 
                     <ImageButton
                         android:layout_height="56dp"
